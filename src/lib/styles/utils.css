@@ -1,0 +1,97 @@
+.container {
+	--width-cutout: 2rem;
+	width: min(100% - (var(--width-cutout) * 2), 1600px);
+	margin-inline: auto;
+}
+
+.stack {
+	display: flex;
+	flex-direction: column;
+	gap: var(--stack-gap, 1rem);
+}
+
+.cluster {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--cluster-gap, 1rem);
+}
+
+.flex-flow {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--flex-gap, 1rem);
+
+	> * {
+		flex-grow: 1;
+		flex-basis: calc((var(--breakpoint, 40rem) - 100%) * 9999);
+	}
+}
+
+.grid-flow {
+	display: grid;
+	gap: var(--grid-gap, 1rem);
+	grid-template-columns: repeat(auto-fit, minmax(min(var(--min-col-width, 20rem), 100%), 1fr));
+}
+
+.prose > * + * {
+	margin-top: var(--prose-gap, 1em);
+}
+
+.pile {
+	display: grid;
+	grid-template-areas: 'pile';
+	place-items: center;
+
+	> * {
+		grid-area: pile;
+	}
+}
+
+.debug,
+.debug * {
+	outline: 1px solid rgb(255 0 0 / 0.3);
+}
+
+/*
+Get --svg URLs from https://icon-sets.iconify.design and use as shown:
+.icon-home { --svg: url("data:image/svg+xml...") }
+*/
+[class^='icon-'],
+[class*=' icon-'] {
+	display: inline-block;
+	vertical-align: middle;
+	width: var(--size, 1em);
+	height: var(--size, 1em);
+	background-color: currentColor;
+	-webkit-mask-image: var(--svg);
+	mask-image: var(--svg);
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-size: 100% 100%;
+	mask-size: 100% 100%;
+}
+
+.sr-only,
+.sr-only-focusable:not(:focus, :focus-within) {
+	border: 0 !important;
+	clip-path: inset(50%) !important;
+	height: 1px !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	width: 1px !important;
+	white-space: nowrap !important;
+}
+
+/* Prevent visually hidden caption from breaking table's collapsing borders */
+.sr-only:not(caption),
+.sr-only-focusable:not(caption):not(:focus, :focus-within) {
+	position: absolute !important;
+}
+
+/* Prevent overflowing children from being focusable. */
+.sr-only *,
+.sr-only-focusable:not(:focus, :focus-within) * {
+	overflow: hidden !important;
+}
