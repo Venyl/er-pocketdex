@@ -3,6 +3,11 @@
 	import { pokemonList } from "$lib/pokemonData";
 	import type { Pokemon, PokemonType } from "$lib/types";
 
+	const sprites = import.meta.glob("$lib/assets/sprites/*.png", {
+		eager: true,
+		query: "?url",
+		import: "default"
+	});
 	let topPagination: HTMLDivElement | undefined = $state();
 
 	const colors: Record<PokemonType, string> = {
@@ -266,7 +271,11 @@
 							></span></button
 						>
 					</div>
-					<img src="/sprites/{pokemon.id}.png" alt={pokemon.name} loading="lazy" />
+					<img
+						src={sprites[`/src/lib/assets/sprites/${pokemon.id}.png`]}
+						alt={pokemon.name}
+						loading="lazy"
+					/>
 				</div>
 				<div class="stats stack">
 					{#each Object.entries(stats) as [statKey, statName] (statKey)}
